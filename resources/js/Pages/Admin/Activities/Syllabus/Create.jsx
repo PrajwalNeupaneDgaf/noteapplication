@@ -75,7 +75,7 @@ function Create({data ,setIsVisible}) {
                   <Input type='file'display={'none'} onChange={(e)=>{
                     setFile(e.target.files[0])
                     setName(e.target.files[0].name)
-                  }} accept='.pdf , .docx' id='inputFileNote'/>
+                  }} accept='.pdf ' id='inputFileNote'/>
                 </InputGroup>
               </Box>
             </Box>

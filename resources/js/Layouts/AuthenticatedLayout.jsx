@@ -20,7 +20,7 @@ export default function Authenticated({ user, header, children }) {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
-                            <div className="hidden space-x-6 sm:-my-px sm:ms-10 sm:flex">
+                            <div className="hidden space-x-6 sm:-my-px sm:ms-10 lg:flex">
                                 <NavLink
                                     href={route("admin")}
                                     active={route().current("admin")}
@@ -54,10 +54,16 @@ export default function Authenticated({ user, header, children }) {
                                 <NavLink href={route('questions.index')} active={route().current('questions.index')}>
                                    Questions
                                 </NavLink>
+                                <NavLink href={route('our-team.index')} active={route().current('our-team.index')}>
+                                   Our Team
+                                </NavLink>
+                                <NavLink href={route('users.index')} active={route().current('users.index')}>
+                                   Users
+                                </NavLink>
                             </div>
                         </div>
 
-                        <div className="hidden sm:flex sm:items-center sm:ms-6">
+                        <div className="hidden lg:flex sm:items-center sm:ms-6">
                             <div className="ms-3 relative">
                                 <Dropdown>
                                     <Dropdown.Trigger>
@@ -102,7 +108,7 @@ export default function Authenticated({ user, header, children }) {
                             </div>
                         </div>
 
-                        <div className="-me-2 flex items-center sm:hidden">
+                        <div className="-me-2 flex items-center lg:hidden">
                             <button
                                 onClick={() =>
                                     setShowingNavigationDropdown(
@@ -148,7 +154,7 @@ export default function Authenticated({ user, header, children }) {
                 <div
                     className={
                         (showingNavigationDropdown ? "block" : "hidden") +
-                        " sm:hidden"
+                        " lg:hidden"
                     }
                 >
                     <div className="pt-2 pb-3 space-y-1">
@@ -188,6 +194,18 @@ export default function Authenticated({ user, header, children }) {
                         >
                           Questions
                         </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route("our-team.index")}
+                            active={route().current("our-team.index")}
+                        >
+                          Our Team
+                        </ResponsiveNavLink> 
+                        <ResponsiveNavLink
+                            href={route("users.index")}
+                            active={route().current("users.index")}
+                        >
+                          Users
+                        </ResponsiveNavLink> 
                         {/* <ResponsiveNavLink
                             href={route("activities.index")}
                             active={route().current("activities.index")}

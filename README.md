@@ -20,7 +20,7 @@ The MVC pattern is strictly followed, ensuring a clean separation between logic 
 - Laravel Breeze for authentication scaffolding.
 - Spatie for advanced authorization.
 - Apache2 server configuration for local development.
-- Faculty management system integrated with user authentication.
+- Faculty managemen t system integrated with user authentication.
 - Semester note handling for academic projects.
 
 ## Learning Inertia.js and React in Laravel

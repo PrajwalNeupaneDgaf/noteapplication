@@ -13,7 +13,7 @@ import React from "react";
 import LayoutFrontend from "../LayoutFrontend";
 import BodyLayout from "../Partials/BodyLayout";
 
-function Main({ faculties }) {
+function Main({ faculties,ourTeam }) {
     const backgroundImage =
         "https://www.onlinecoursehow.com/wp-content/uploads/2019/07/Elearning-1024x512.jpg"; // Placeholder for background
     const homeImage =
@@ -101,56 +101,27 @@ function Main({ faculties }) {
                             work together to bring the best learning experience
                             to you.
                         </Text>
-
-                        {/* Team Members */}
                         <SimpleGrid
-                            columns={[1, 2, 3]}
+                           columns={[1,ourTeam.length>2 ? 2 : ourTeam.length,ourTeam.length>3 ? 3 : ourTeam.length]}
                             spacing={10}
                             alignItems="center"
+                            justifyContent={'center'}
+                            alignContent={'center'} 
                         >
-                            {/* Team Member 1 */}
-                            <VStack>
+                           {ourTeam?.map((item ,idx)=>
+                           <VStack key={idx}>
                                 <Image
-                                    src={teamImage}
+                                    src={`http://127.0.0.1:8000/storage/${item.image}`}
                                     alt="Team Member 1"
                                     borderRadius="full"
                                     boxSize="150px"
                                 />
                                 <Heading as="h3" size="md">
-                                    John Doe
+                                    {item.name}
                                 </Heading>
-                                <Text fontSize="sm">CEO & Founder</Text>
-                            </VStack>
-
-                            {/* Team Member 2 */}
-                            <VStack>
-                                <Image
-                                    src={teamImage}
-                                    alt="Team Member 2"
-                                    borderRadius="full"
-                                    boxSize="150px"
-                                />
-                                <Heading as="h3" size="md">
-                                    Jane Smith
-                                </Heading>
-                                <Text fontSize="sm">
-                                    Chief Technology Officer
-                                </Text>
-                            </VStack>
-
-                            {/* Team Member 3 */}
-                            <VStack>
-                                <Image
-                                    src={teamImage}
-                                    alt="Team Member 3"
-                                    borderRadius="full"
-                                    boxSize="150px"
-                                />
-                                <Heading as="h3" size="md">
-                                    Emily Johnson
-                                </Heading>
-                                <Text fontSize="sm">Head of Education</Text>
-                            </VStack>
+                                <Text fontSize="sm">{item.designation}</Text>
+                            </VStack>)
+                            }
                         </SimpleGrid>
                     </VStack>
                 </BodyLayout>

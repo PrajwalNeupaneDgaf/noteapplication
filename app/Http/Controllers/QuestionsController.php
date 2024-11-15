@@ -58,7 +58,10 @@ class QuestionsController extends Controller
         // Handle file upload
         $filePath = null; // Initialize file path variable
         if ($request->hasFile('file')) {
-            $filePath = $request->file('file')->store('question_files', 'public'); // Store in public/question_files
+            $filename = time().'.'.$request->file('file')->getClientOriginalExtension();
+            $path = public_path('question_files');
+            $request->file('file')->move($path,$filename);
+            $filePath = 'question_files/'.$filename;
         }
 
         // Create new question
@@ -99,55 +102,60 @@ class QuestionsController extends Controller
             'faculty_id' => 'required|exists:faculties,id',
             'semester_id' => 'required|exists:semesters,id',
             'subject_id' => 'required|exists:subjects,id',
+            'file' => 'nullable|file|mimes:pdf,docx|max:2048', // Optional file input
             'year' => 'required', // Validate year
         ]);
-
+    
         $question = Question::findOrFail($id);
         $filePath = $question->file_path; // Default to current file path
-
+    
         // Handle file upload if provided
         if ($request->hasFile('file')) {
-            // Delete old file if exists
-            if ($question->file_path) {
-                $oldFilePath = public_path($question->file_path); // Adjusted path
+            // Delete old file if it exists
+            if ($filePath) {
+                $oldFilePath = public_path($filePath);
                 if (file_exists($oldFilePath)) {
                     unlink($oldFilePath); // Delete old file
                 }
             }
-
+    
             // Store new file
-            $filePath = $request->file('file')->store('question_files', 'public'); // Store in public/question_files
+            $filename = time().'.'.$request->file('file')->getClientOriginalExtension();
+            $path = public_path('question_files');
+            $request->file('file')->move($path, $filename);
+            $filePath = 'question_files/'.$filename;
         }
-
+    
         // Update question
         $question->update([
             'name' => $validated['name'],
             'faculty_id' => $validated['faculty_id'],
             'semester_id' => $validated['semester_id'],
             'subject_id' => $validated['subject_id'],
-            'file_path' => $filePath,
+            'file_path' => $filePath, // Update file path if a new file was uploaded
             'year' => $validated['year'], // Update year
         ]);
-
+    
         return redirect()->route('questions.index')->with('success', 'Question updated successfully!');
     }
-
+    
     // Remove the specified resource from storage
     public function destroy(string $id)
     {
         $question = Question::findOrFail($id);
-
-        // Delete file if it exists
+    
+        // Delete the associated file if it exists
         if ($question->file_path) {
-            $filePath = public_path($question->file_path); // Adjusted path
+            $filePath = public_path($question->file_path);
             if (file_exists($filePath)) {
-                unlink($filePath); // Delete file
+                unlink($filePath); // Delete the file
             }
         }
-
-        // Delete the question
+    
+        // Delete the question record
         $question->delete();
-
+    
         return redirect()->route('questions.index')->with('success', 'Question deleted successfully!');
     }
+    
 }

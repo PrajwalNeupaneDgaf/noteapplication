@@ -41,7 +41,7 @@ function NotesQuestionPage({faculties ,faculty,semester,datas,short}) {
                               item?.notes?.map((itm,idx)=>
                               <Box key={idx} className='flex justify-center flex-col gap-4 items-center w-full'>
                                 <Button w={'80%'} onClick={()=>{
-                                  router.visit(`/faculty=${short}/semester=${semester}/subject=${item.subject}/${itm.id}`)
+                                  router.visit(`/faculty=${short}/semester=${semester}/subject=${item.subject}/note=${itm.id}`)
                                 }} color={'white'} fontFamily={'monospace'} bg={'blue.600'} rounded={'none'} _hover={{bg:'blue.700'}} fontSize={['xs','sm','sm','sm']} >
                                   {
                                     itm.name
@@ -71,7 +71,9 @@ function NotesQuestionPage({faculties ,faculty,semester,datas,short}) {
                             { item.questions.length >0?
                               item?.questions?.map((itm,idx)=>
                               <Box key={idx} className='flex justify-center flex-col gap-4 items-center'>
-                                <Button color={'white'} fontFamily={'monospace'} bg={'blue.600'} rounded={'none'} _hover={{bg:'blue.700'}} fontSize={['xs','sm','sm','md']} >
+                                <Button onClick={()=>{
+                                  router.visit(`/faculty=${short}/semester=${semester}/subject=${item.subject}/question=${itm.id}`)
+                                }}  w={'80%'} color={'white'} fontFamily={'monospace'} bg={'blue.600'} rounded={'none'} _hover={{bg:'blue.700'}} fontSize={['xs','sm','sm','md']} >
                                   {
                                     itm.year
                                   }

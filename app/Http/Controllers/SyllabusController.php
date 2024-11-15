@@ -37,7 +37,7 @@ class SyllabusController extends Controller
     $validated = $request->validate([
         'name' => 'required|string|max:255',
         'faculty_id' => 'required|exists:faculties,id',
-        'file' => 'required|file|mimes:pdf,docx|max:2048',
+        'file' => 'required|file|mimes:pdf|max:2048',
     ]);
 
     // Handle file upload
