@@ -47,7 +47,7 @@ To set up the project on your local environment, follow these steps:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/your-repository.git
+   git clone https://github.com/PrajwalNeupaneDgaf/noteapplication
    cd your-repository
    ```
 
@@ -75,17 +75,13 @@ To set up the project on your local environment, follow these steps:
      DB_PASSWORD=your_password
      ```
 
-5. **Generate an application key**:
-   ```bash
-   php artisan key:generate
-   ```
 
-6. **Run database migrations**:
+5. **Run database migrations**:
    ```bash
    php artisan migrate
    ```
 
-7. **Build front-end assets**:
+6. **Build front-end assets**:
    ```bash
    npm run dev
    ```
@@ -94,7 +90,7 @@ To set up the project on your local environment, follow these steps:
      npm run build
      ```
 
-8. **Start the development server**:
+7. **Start the development server**:
    ```bash
    php artisan serve
    ```
